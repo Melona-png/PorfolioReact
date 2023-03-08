@@ -1,20 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import NavTabs from "./NavTabs";
+import About from "./pages/About";
+import Projects from "./pages/Projects"
+import Contact from "./pages/Contact";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+export default function PortfolioContainer() {
+  const [currentPage, setCurrentPage] = useState("About");
 
-import Navbar from "./NavTabs";
-import Main from "./Main";
-import Footer from "./Footer";
+  // TODO: Add a comment describing the functionality of this method
+  const renderPage = () => {
+    if (currentPage === "About") {
+      return <About />;
+    }
+    if (currentPage === "Projects") {
+      return <Projects />;
+    }
+    return <Contact />;
+  };
 
-export default function Container() {
-  const [activePage, setActivePage] = useState("About");
+  const handlePageChange = (page) => setCurrentPage(page);
 
   return (
     <div>
-      <Navbar activePage={activePage} setActivePage={setActivePage} />
-      <Main activePage={activePage} setActivePage={setActivePage} />
-      <Footer />
+      {/* // TODO: Add a comment describing what we are passing as props */}
+      <NavTabs currentPage={currentPage} handlePageChange={handlePageChange} />
+      {/* // TODO: Add a comment explaining what is happening on the following line */}
+      {renderPage()}
     </div>
   );
 }
